@@ -16,7 +16,9 @@ public class Main {
 
         Cennik cennik = Cennik.pobierzCennik();
 
-        ;
+        cennik.dodaj(typ.OSOBOWY, "Syrena", 1.5, 2.5, 1.85, 100);
+        cennik.dodaj(typ.DOSTAWCZY, "Żuk", 4, 3, 150, 2);
+
 
         Klient f1 = new Klient("f1", 900, true);
 
