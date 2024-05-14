@@ -5,7 +5,8 @@ public class Klient {
     private String nazwa;
     private int kwota;
     private boolean abonament;
-    private ListaZyczen listaZyczen;
+    private ListaZyczen listaZyczen = new ListaZyczen();
+    private Koszyk koszyk = new Koszyk();
 
 
     public Klient(String nazwa, int kwota, boolean abonament){
@@ -20,5 +21,8 @@ public class Klient {
 
     public ListaZyczen pobierzListeZyczen(){
         return this.listaZyczen;
+    }
+    public Koszyk pobierzKoszyk(){
+        return this.koszyk;
     }
 }

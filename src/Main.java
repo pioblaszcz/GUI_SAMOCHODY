@@ -1,17 +1,32 @@
+import Samochody.Darmo;
+import Samochody.Dostawczy;
+import Samochody.Osobowy;
+import Samochody.Zabytkowy;
+
+enum typ{
+    OSOBOWY,
+        DOSTAWCZY,
+    ZABYTKOWY,
+    DARMO
+        }
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        Cennik cennik = Cennik.pobierzCennik();
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+        ;
+
+        Klient f1 = new Klient("f1", 900, true);
+
+        f1.dodaj(new Osobowy("Syrena", 80));
+        f1.dodaj(new Dostawczy("Żuk", 200));
+        f1.dodaj(new Zabytkowy("Lublin", 30));
+        f1.dodaj(new Darmo("Tuk-Tuk", 60));
+
+        ListaZyczen listaF1 = f1.pobierzListeZyczen();
+
+        System.out.println("Lista życzeń klienta \n" + listaF1);
     }
 }
