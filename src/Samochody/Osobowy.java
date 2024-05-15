@@ -6,6 +6,6 @@ public class Osobowy extends Samochod {
     {
         super(marka, odleglosc);
 
-        this.setType("Osobowy");
+        this.setType("OSOBOWY");
     }
 }

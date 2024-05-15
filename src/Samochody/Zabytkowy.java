@@ -5,6 +5,6 @@ public class Zabytkowy extends Samochod{
     {
         super(marka, odleglosc);
 
-        this.setType("Zabytkowy");
+        this.setType("ZABYTKOWY");
     }
 }

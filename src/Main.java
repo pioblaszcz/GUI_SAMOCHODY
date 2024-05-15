@@ -17,7 +17,12 @@ public class Main {
         Cennik cennik = Cennik.pobierzCennik();
 
         cennik.dodaj(typ.OSOBOWY, "Syrena", 1.5, 2.5, 1.85, 100);
-        cennik.dodaj(typ.DOSTAWCZY, "Żuk", 4, 3, 150, 2);
+
+        cennik.dodaj(typ.DOSTAWCZY, "Żuk", 4, 3, 150);
+
+        cennik.dodaj(typ.ZABYTKOWY, "Ford T", 10);
+
+        cennik.dodaj(typ.DARMO, 50, "Tuk-Tuk");
 
 
         Klient f1 = new Klient("f1", 900, true);
@@ -29,6 +34,9 @@ public class Main {
 
         ListaZyczen listaF1 = f1.pobierzListeZyczen();
 
-        System.out.println("Lista życzeń klienta \n" + listaF1);
+        System.out.println("Lista życzeń klienta " + listaF1);
+
+        Koszyk koszykF1 = f1.pobierzKoszyk();
+        f1.przepakuj();
     }
 }

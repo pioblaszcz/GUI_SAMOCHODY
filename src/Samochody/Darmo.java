@@ -5,6 +5,6 @@ public class Darmo extends Samochod{
     {
         super(marka, odleglosc);
 
-        this.setType("Darmo");
+        this.setType("DARMO");
     }
 }

@@ -5,6 +5,6 @@ public class Dostawczy extends Samochod{
     {
         super(marka, odleglosc);
 
-        this.setType("Dostawczy");
+        this.setType("DOSTAWCZY");
     }
 }
