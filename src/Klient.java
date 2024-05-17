@@ -9,7 +9,6 @@ public class Klient {
     private boolean abonament;
     protected ListaZyczen listaZyczen;
     private Koszyk koszyk;
-
     private ArrayList<Koszyk> zakupy = new ArrayList<Koszyk>();
 
 
@@ -59,15 +58,67 @@ public class Klient {
         for(Samochod samochod : tempLista) this.listaZyczen.usunSamochod(samochod);
     }
 
+    public void zwroc(typ typ, String nazwa, int odleglosc){
+        Koszyk ostatnieZakupy = zakupy.get(zakupy.size() - 1);
+
+        for(Samochod samochod : ostatnieZakupy){
+            if(odleglosc > samochod.getOdleglosc()) {
+                System.out.println("Podany zwrot nie moze byc zrealizowany. Liczba km zbyt wysoka");
+                break;
+            }
+            if(samochod.getType().toString().equals(typ.toString()) && samochod.getMarka().equals(nazwa)){
+                this.portfel += ostatnieZakupy.pobierzCeneZaOdleglosc(samochod, odleglosc);
+                for(Samochod samochod1 : this.koszyk){
+                    if(samochod1.getType().equals(samochod.getType()) && samochod1.getMarka().equals(samochod.getMarka())){
+                        samochod1.setOdleglosc(samochod1.getOdleglosc() + odleglosc);
+                    }
+                }
+                break;
+            }
+        }
+    }
     public void zaplac(typPlatnosci typPlatnosci, boolean nadmiar){
 
-        double dodatkowaKwota = 0;
+        double dodatkowaKwota = typPlatnosci == typPlatnosci.KARTA ? this.koszyk.pobierzLacznaCene() * 0.02 : 0;
 
         if(nadmiar){
+            if(this.portfel - (this.koszyk.pobierzLacznaCene() + dodatkowaKwota) > 0){
+                this.zakupy.add(this.koszyk);
+                this.portfel -= (this.koszyk.pobierzLacznaCene() + dodatkowaKwota);
+                this.koszyk.clear();
+            }else {
+                Koszyk tempKoszyk = new Koszyk(this.imie, this.abonament);
+                tempKoszyk.addAll(this.koszyk);
 
+                for(Samochod samochod : this.koszyk){
+                    if(this.portfel - (tempKoszyk.pobierzLacznaCene() - this.koszyk.pobierzCeneSamochodu(samochod) + dodatkowaKwota) > 0){
+                        double pozostalaKwota = this.portfel - (tempKoszyk.pobierzLacznaCene() - this.koszyk.pobierzCeneSamochodu(samochod) + dodatkowaKwota);
+                        Samochod samochodKopia = new Samochod(samochod.getMarka(), samochod.getOdleglosc());
+                        samochodKopia.setType(samochod.getType());
+
+                        tempKoszyk.ograniczKwote(samochodKopia, pozostalaKwota);
+                        tempKoszyk.remove(samochod);
+                        tempKoszyk.add(samochodKopia);
+
+                        samochod.setOdleglosc(samochod.getOdleglosc() - samochodKopia.getOdleglosc());
+                        break;
+                    }else if(this.portfel - (tempKoszyk.pobierzLacznaCene() - this.koszyk.pobierzCeneSamochodu(samochod) + dodatkowaKwota) == 0){
+                       tempKoszyk.remove(samochod);
+                       break;
+                    }else{
+                        tempKoszyk.remove(samochod);
+                    }
+
+
+                }
+
+                this.zakupy.add(tempKoszyk);
+                this.portfel -= tempKoszyk.pobierzLacznaCene() + dodatkowaKwota;
+
+                this.koszyk.removeAll(tempKoszyk);
+
+            }
         }else{
-            dodatkowaKwota = typPlatnosci == typPlatnosci.KARTA ? this.koszyk.pobierzLacznaCene() * 0.02 : 0;
-
             if(this.portfel - (this.koszyk.pobierzLacznaCene() + dodatkowaKwota) > 0){
                 this.zakupy.add(this.koszyk);
                 this.portfel -= (this.koszyk.pobierzLacznaCene() + dodatkowaKwota);

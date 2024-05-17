@@ -59,7 +59,7 @@ public class CarshareTest {
         f1.zaplac(typPlatnosci.KARTA, false);
 
         // Ile klientowi f1 zostało pieniędzy?
-        System.out.println("Po zapłaceniu, klientowi f1 zostało: " + f1.pobierzPortfel() + " zł");
+        System.out.println("\nPo zapłaceniu, klientowi f1 zostało: " + f1.pobierzPortfel() + " zł");
 
         System.out.println("\nPo zapłaceniu, koszyk klienta " + f1.pobierzKoszyk());
         System.out.println("Po zapłaceniu, koszyk klienta " + koszykF1);
@@ -69,7 +69,7 @@ public class CarshareTest {
         dakar.dodaj(new Dostawczy("Żuk", 100));
         dakar.dodaj(new Zabytkowy("Ford T", 50));
 
-        System.out.println("Lista życzeń klienta " + dakar.pobierzListeZyczen());
+        System.out.println("\nLista życzeń klienta " + dakar.pobierzListeZyczen());
 
         Koszyk koszykDakar = dakar.pobierzKoszyk();
         dakar.przepakuj();
@@ -80,5 +80,17 @@ public class CarshareTest {
         System.out.println("\nPo przepakowaniu, koszyk klienta " + dakar.pobierzKoszyk());
 
         dakar.zaplac(typPlatnosci.PRZELEW, true);
+
+        System.out.println("\nPo zapłaceniu, klientowi dakar zostało: " + dakar.pobierzPortfel() + " zł");
+
+        // Co zostało w koszyku klienta dakar (za mało pieniędzy miał)
+        System.out.println("\nPo zapłaceniu, koszyk klienta " + koszykDakar);
+        dakar.zwroc(typ.DOSTAWCZY, "Żuk", 50);	// zwrot (do koszyka) 50 km dostawczego "Żuka" z ostatniej transakcji
+
+        // Ile klientowi dakar zostało pieniędzy?
+        System.out.println("\nPo zwrocie, klientowi dakar zostało: " + dakar.pobierzPortfel() + " zł");
+
+        // Co zostało w koszyku klienta dakar
+        System.out.println("\nPo zwrocie, koszyk klienta " + koszykDakar);
     }
 }

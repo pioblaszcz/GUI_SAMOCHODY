@@ -20,7 +20,7 @@ public abstract class ListySamochodow extends ArrayList<Samochod> {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(this.imie + (this.size() > 0 ? ":\n" : " --pusto"));
+        stringBuilder.append(this.imie + (this.size() > 0 ? ":\n" : ": --pusto"));
 
         for (Samochod samochod : this) {
             boolean znalezionoCene = false;

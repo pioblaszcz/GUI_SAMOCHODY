@@ -17,6 +17,9 @@ public class Samochod {
     public int getOdleglosc() {
         return odleglosc;
     }
+    public void setOdleglosc(int o){
+        this.odleglosc = o;
+    }
 
     public String getType() {
         return type;
